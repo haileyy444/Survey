@@ -1,15 +1,15 @@
-{% extends 'app.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
     <h1>{{survey.title}}</h1>
     <h2>Please complete our quick survey!</h2>
+
+      {% for step in instructions %}
+        <p>
+          {{survey.instructions}}
+        </p>
+      {% endfor %}
     <form action="/start" method="POST">
-           {% for step in instructions %}
-                <p>
-                  {{survey.instructions}}
-                </p>
-            {% endfor %}
-      
-      <button>Start</button>
+      <button type="submit">Start</button>
     </form>
 {% endblock %}

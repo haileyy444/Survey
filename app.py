@@ -36,11 +36,11 @@ def start_survey():
 def show_question(questionID):
     responses = session.get(RESPONSE_KEY)
 
-    if(responses is None):
+    if(not responses or responses is None):
         return redirect("/")
     
     if(len(responses) == len(survey.questions)):
-        return redirect("/thankUser")
+        return redirect("/complete")
     
     if (len(responses) != questionID):
         flash(f"Error, invalid question id: {questionID}.")
@@ -59,7 +59,7 @@ def show_question(questionID):
 def answers():
     choice = request.form['answer']
 
-    responses = session[RESPONSE_KEY]
+    responses = session.get[RESPONSE_KEY]
     responses.append(choice)
     session[RESPONSE_KEY] = responses
 
